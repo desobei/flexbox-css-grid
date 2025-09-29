@@ -1,0 +1,258 @@
+:root {
+  --primary: #1877f2;
+  --secondary: #f0f2f5;
+  --text-dark: #1c1e21;
+  --white: #fff;
+  --hover: #166fe5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--secondary);
+  color: var(--text-dark);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+/* Any main content wrapper should expand */
+main, .card-container, .grid-layout, .gallery, .portfolio-grid {
+  flex: 1;
+}
+
+/* Shared header (Task 0) */
+header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+footer {
+  grid-area: footer;
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  transition: 0.3s;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+nav ul li a:hover {
+  background: var(--hover);
+}
+
+/* Shared footer */
+footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto; /* ensures footer is pushed down */
+}
+
+/*Task 1: Flexbox Card Row */
+.card-container {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  justify-content: center;
+  flex: 1; 
+}
+
+.card {
+  background: var(--white);
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Task 2: Grid Layout*/
+.grid-layout {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";  
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+/* Use the same global header inside the grid */
+.grid-header {
+  grid-area: header;
+}
+
+.grid-sidebar ul {
+  list-style: none;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.grid-sidebar ul li {
+  margin-bottom: 0.5rem;
+}
+
+.grid-sidebar ul li a {
+  display: block;
+  padding: 0.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.grid-sidebar ul li a:hover {
+  background: var(--hover);
+  color: var(--white);
+}
+
+
+.grid-main {
+  grid-area: main;
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.grid-footer {
+  grid-area: footer;
+}
+
+/* Responsive stacking: sidebar above main */
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+  }
+}
+
+/*Task 3: Image Gallery*/
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 2rem;
+  flex: 1;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  filter: brightness(80%);
+}
+
+/*Task 4: Portfolio Page*/
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+  flex: 1; /* pushes footer down */
+}
+
+/* Project Cards */
+.project-card {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;               /* Flexbox inside project cards */
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 1.5rem;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.project-card img {
+  width: 200px;
+  border-radius: 8px;
+}
+
+.project-card h3 {
+  color: var(--primary);
+}
+
+.project-card button {
+  align-self: flex-start;  /* Button aligns neatly */
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--white);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.project-card button:hover {
+  background: var(--hover);
+}
+
+/* Responsive: stack projects & sidebar */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
